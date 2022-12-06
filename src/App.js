@@ -1,25 +1,40 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { Form } from './components/classes/Form'
+import { Form as FormFunc } from './components/func/Form'
+import { Form2 as FormFunc2 } from './components/func/Form2';
 
-function App() {
+export function App(props) {
+  const [toggle, setToggle] = useState(true)
+  const [toggleSecond, setToggleSecond] = useState(false)
+  const [arr, setArr] = useState([
+    { name: 'Biba', age: 10 },
+    { name: 'Boba', age: 15 },
+    { name: 'Giga', age: 20 },
+    { name: 'Goga', age: 25 }
+  ])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header
+        className="App-header"
+      >
+        My first React App
+        <Form />
+        <hr />
+        <button onClick={() => setToggle(!toggle)}>{toggle ? 'Hide' : 'Show'}</button>
+        {toggle && <FormFunc title='Function Component. Use it' />}
+        <hr />
+        Work with arrays
+        <ul>
+          {arr.map((item, idx) => (
+            <li key={idx}>[{item.name}, {item.age}]</li>
+          ))}
+        </ul>
+        <hr />
+        <button onClick={() => setToggleSecond(!toggleSecond)}>{toggleSecond ? 'HideSecond' : 'ShowSecond'}</button>
+        {toggleSecond && <FormFunc2 title='Function Component 2. Use it too' />}
       </header>
-    </div>
+    </div >
   );
 }
-
-export default App;
